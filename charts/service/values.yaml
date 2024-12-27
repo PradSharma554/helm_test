@@ -126,4 +126,3 @@ datastores:
   cockroachdb:
   cassandra:
   redisdistributed:
-    - datastore : "redis"
