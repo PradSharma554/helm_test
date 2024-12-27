@@ -3,7 +3,7 @@ entries:
   redis-distributed:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2024-12-27T00:34:47.21103+05:30"
+    created: "2024-12-27T11:01:31.308992+05:30"
     description: Helm chart deploys redis distributed instance
     digest: b527f3bae29a145253443802ba437dc84d348ad9468e089ad016b4831b9d2e9c
     icon: https://abcd/logo.png
@@ -14,4 +14,19 @@ entries:
     urls:
     - redis-distributed-v0.0.1.tgz
     version: v0.0.1
-generated: "2024-12-27T00:34:47.210253+05:30"
+  service:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2024-12-27T11:01:31.309431+05:30"
+    description: Helm chart creates a deployment, service, hpa for a service along
+      with serviceMonitor etc
+    digest: 833aeafaff483c9ec78ff6f6a9dcf3692560be5e7769bafe34f740284ae2409f
+    icon: https://zop.dev/logo.png
+    maintainers:
+    - name: ZopDev
+      url: zop.dev
+    name: service
+    urls:
+    - service-v0.0.12.tgz
+    version: v0.0.12
+generated: "2024-12-27T11:01:31.308419+05:30"
