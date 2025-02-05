@@ -3,7 +3,7 @@ entries:
   redis-distributed:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2025-02-05T16:34:55.834826+05:30"
+    created: "2025-02-05T16:57:34.488333+05:30"
     description: Helm chart deploys redis distributed instance
     digest: b527f3bae29a145253443802ba437dc84d348ad9468e089ad016b4831b9d2e9c
     icon: https://abcd/logo.png
@@ -17,7 +17,7 @@ entries:
   service:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2025-02-05T16:34:55.835255+05:30"
+    created: "2025-02-05T16:57:34.488884+05:30"
     description: Helm chart creates a deployment, service, hpa for a service along
       with serviceMonitor etc
     digest: 2fa3202a717d9230224ce8350e0f6ed8390bbd15eebf6f77e4bbb9083cf23620
@@ -32,15 +32,11 @@ entries:
   zookeeper:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2025-02-05T16:34:55.835519+05:30"
+    created: "2025-02-05T16:57:34.489069+05:30"
     description: A Helm chart for Deploying Zookeeper on Kubernetes
-    digest: e90d8df9dd9d4c285654a33fc1b5a297b8d16eac3dece3ec1ef6b73f13b938f6
-    icon: https://zop.dev/logo.png
-    maintainers:
-    - name: ZopDev
-      url: zop.dev
+    digest: 87fd6264df489f34154b4e3e0760a7224416334f94c520831477619d707c8c65
     name: zookeeper
     urls:
-    - https://helm.zop.dev/zookeeper-v0.0.1.tgz
+    - https://arunesh-j.github.io/helm_test/docs/zookeeper-v0.0.1.tgz
     version: v0.0.1
-generated: "2025-02-05T16:34:55.83455+05:30"
+generated: "2025-02-05T16:57:34.487526+05:30"
