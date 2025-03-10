@@ -232,6 +232,9 @@ spec:
           {{- range $k,$v := .Values.volumeMounts.configmaps }}
             - name: {{ $v.name }}
               mountPath: {{ $v.mountPath }}
+            {{- if $v.readOnly }}
+              readOnly: {{ $v.readOnly }}
+            {{- end }}              
             {{- if ne $v.subPath "" }}
               subPath: {{ $v.subPath }}
             {{- end }}
