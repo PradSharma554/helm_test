@@ -66,6 +66,16 @@ spec:
           {{- if .Values.initContainer.args }}
           args: {{ .Values.initContainer.args }}
           {{- end }}
+          {{- if .Values.initContainer.command }}
+          command: {{  tpl (toJson .Values.initContainer.command) . }}
+          {{- end }}
+          {{- if .Values.initContainer.envFrom }}
+          envFrom:
+          {{- range $i, $name := .Values.initContainer.envFrom.secrets }}
+            - secretRef:
+                name: {{ tpl $name $ }}
+          {{- end }}
+          {{- end}}
           env:
             {{- range $k,$v := .Values.initContainer.env }}
             - name: {{ $k | quote }}
@@ -83,6 +93,9 @@ spec:
         - name: {{ .Values.name }}
           image: {{ .Values.image }}
 
+          {{- if .Values.command }}
+          command: {{  tpl (toJson .Values.command) . }}
+          {{- end}}
           securityContext:
             {{- with .Values.Containers }}
             {{- if .privileged | default false }}
@@ -111,22 +124,22 @@ spec:
             {{- end }}
             {{- range $i, $name := .Values.envFrom.secrets }}
             - secretRef:
-                name: {{ $name }}
+                name: {{ tpl $name $ }}
                 {{- end }}
             {{- if and .Values.datastores .Values.datastores.mysql }}
             {{- range $i, $k := .Values.datastores.mysql }}
             - configMapRef:
-                name: {{ $k.datastore }}-{{ $k.database }}-{{ $.Release.Name}}-mysql-configmap
+                name: {{ $k.datastore }}-{{ replace "_" "-" $k.database }}-{{ $.Release.Name}}-mysql-configmap
             - secretRef:
-                name: {{ $k.datastore }}-{{ $k.database }}-{{ $.Release.Name}}-mysql-database-secret
+                name: {{ $k.datastore }}-{{ replace "_" "-" $k.database }}-{{ $.Release.Name}}-mysql-database-secret
             {{- end }}
             {{- end }}
             {{- if and .Values.datastores .Values.datastores.postgres }}
             {{- range $i, $k := .Values.datastores.postgres }}
             - configMapRef:
-                name: {{ $k.datastore }}-{{ $k.database }}-{{ $.Release.Name}}-postgres-configmap
+                name: {{ $k.datastore }}-{{ replace "_" "-" $k.database }}-{{ $.Release.Name}}-postgres-configmap
             - secretRef:
-                name: {{ $k.datastore }}-{{ $k.database }}-{{ $.Release.Name}}-postgres-database-secret
+                name: {{ $k.datastore }}-{{ replace "_" "-" $k.database }}-{{ $.Release.Name}}-postgres-database-secret
             {{- end }}
             {{- end }}
             {{- if and .Values.datastores .Values.datastores.redis }}
@@ -138,7 +151,7 @@ spec:
             {{- if and .Values.datastores .Values.datastores.solr }}
             {{- range $i, $k := .Values.datastores.solr }}
             - configMapRef:
-                name: {{ $k.datastore }}-{{ $.Release.Name}}-solr-configmap
+                name: {{ $k.datastore }}-solr-configmap
             {{- end }}
             {{- end }}
             {{- if and .Values.datastores .Values.datastores.surrealdb }}
@@ -191,6 +204,20 @@ spec:
             {{- range $i, $k := .Values.datastores.redisdistributed }}
             - configMapRef:
                 name: {{ $k.datastore }}-redis-values-configmap
+            {{- end }}
+            {{- end }}
+            {{- if and .Values.datastores .Values.datastores.scylladb }}
+            {{- range $i, $k := .Values.datastores.scylladb }}
+            - configMapRef:
+                name: {{ $k.datastore }}-{{ $k.database }}-{{ $.Release.Name}}-scylladb-configmap
+            - secretRef:
+                name: {{ $k.datastore }}-{{ $k.database }}-{{ $.Release.Name}}-scylladb-database-secret
+            {{- end }}
+            {{- end }}
+            {{- if and .Values.datastores .Values.datastores.kafka }}
+            {{- range $i, $k := .Values.datastores.kafka }}
+            - configMapRef:
+                name: {{ $k.datastore }}-kafka-configmap
             {{- end }}
             {{- end }}
           env:
