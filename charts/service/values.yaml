@@ -22,6 +22,12 @@ metricsPort: 2121
 ports: # Provide the ports on which container runs its services
 # grpc: 9100
 
+nginx:
+  host:
+  annotations:
+  tlsHost:
+  tlsSecretName: 
+
 metricsScrapeInterval: 30s
 
 envFrom:
@@ -63,12 +69,15 @@ env:
 
 appSecrets: false
 
+command :
+
 volumeMounts:
   emptyDir:
 #    - name: zopdev-emptydir
   configmaps:
 #    - name: zopdev-configmap
 #      mountPath: /etc/env
+#      readOnly: true
   secrets:
 #    - name: zopdev-secret
 #      mountPath: /etc/secret
@@ -108,8 +117,10 @@ alerts:
 #  env:
 #    cloud: "AWS"
 #  secrets:
-#   DB_PASSWORD: zs-test-postgresqldb-db-secret      # Secrets will be in the format env_variable: AWS_Secret_Name
- 
+#   DB_PASSWORD: zs-test-postgresqldb-db-secret 
+# Secrets will be in the format env_variable: AWS_Secret_Name
+#  envFrom:
+#  command:    
 # This section deals with creating custom dashboards for grafana
 grafanaDashboard: 
 #  sample format for using json model
@@ -118,6 +129,7 @@ grafanaDashboard:
 
 datastores:
   mysql:
+  postgres: 
   redis:
   solr:
   surrealdb:
@@ -126,3 +138,5 @@ datastores:
   cockroachdb:
   cassandra:
   redisdistributed:
+  scylladb:
+  kafka: 
