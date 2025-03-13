@@ -225,6 +225,7 @@ spec:
               value: {{ $v | quote }}
               {{- end }}
             {{- end }}
+            {{- end }}
           volumeMounts:
           {{- if .Values.volumeMounts }}
           {{- range $k,$v := .Values.volumeMounts.configmaps }}
