@@ -32,6 +32,8 @@ nginx:
 
 metricsScrapeInterval: 30s
 
+args : 
+
 envFrom:
   secrets: [] #List of secrets
   configmaps: [] #List of Configmaps
@@ -98,7 +100,7 @@ volumes:
   pvc:
 #    - name: zopdev-volume
 #      mountPath: /etc/data
-#      pvcName: test
+#      claimName: test
 
 alerts:
   standard:

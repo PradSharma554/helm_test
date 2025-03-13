@@ -48,7 +48,7 @@ spec:
       {{- range $k,$v := .Values.volumes.pvc }}
         - name: {{ $v.name }}
           persistentVolumeClaim:
-            claimName: {{ $v.pvcName }}
+            claimName: {{ $v.claimName }}
       {{- end }}
       {{- end }}
       {{- if .Values.appSecrets }}
@@ -82,7 +82,12 @@ spec:
       containers:
         - name: {{ .Values.name }}
           image: {{ .Values.image }}
-
+          {{- if .Values.args }}
+          args:
+            {{- range .Values.args }}
+            - {{ . | quote }}
+            {{- end }}
+          {{- end }}
           securityContext:
             {{- with .Values.Containers }}
             {{- if .privileged | default false }}
@@ -211,6 +216,12 @@ spec:
             {{- range $k,$v := .Values.env }}
               {{- if ne (toString $v) ""}}
             - name: {{ $k | quote }}
+              {{- if kindIs "map" $v }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $v.name | quote }}
+                  key: {{ $v.key | quote }}
+              {{- else }}
               value: {{ $v | quote }}
               {{- end }}
             {{- end }}

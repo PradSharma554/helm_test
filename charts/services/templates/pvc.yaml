@@ -1,9 +1,9 @@
-{{- if and .Values.volumeMounts .Values.volumeMounts.pvc }}
-{{- range $index, $service :=  .Values.volumeMounts.pvc }}
+{{- if and .Values.volumes .Values.volumes.pvc }}
+{{- range $index, $service :=  .Values.volumes.pvc }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ $service.name }}
+  name: {{ $service.claimName }}
   labels:
     app.kubernetes.io/instance: {{ $.Release.Name }}
     app.kubernetes.io/name: {{ $.Chart.Name }}
