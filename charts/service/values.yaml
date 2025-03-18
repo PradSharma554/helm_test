@@ -7,6 +7,8 @@ replicaCount: 2
 # Docker container image with tag
 image: "zopdev/sample-go-api:latest"
 
+extraAnnotations:
+
 Containers:
   privileged: false
 

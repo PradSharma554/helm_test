@@ -3,6 +3,11 @@ kind: Deployment
 metadata:
   annotations:
     configmap.reloader.stakater.com/reload: "{{ .Values.name }}"
+    {{- if .Values.extraAnnotations }}
+    {{- range $key, $value := .Values.extraAnnotations }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+    {{- end }}
   name: {{ .Values.name }}
   labels:
     app: {{ .Values.name }}
