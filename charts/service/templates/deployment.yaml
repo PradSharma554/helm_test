@@ -5,7 +5,7 @@ metadata:
     configmap.reloader.stakater.com/reload: "{{ .Values.name }}"
     {{- if .Values.extraAnnotations }}
     {{- range $key, $value := .Values.extraAnnotations }}
-    {{ $key }}: {{ $value }}
+    {{ $key }}: {{ tpl $value $ }}
     {{- end }}
     {{- end }}
   name: {{ .Values.name }}
