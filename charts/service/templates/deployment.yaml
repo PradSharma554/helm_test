@@ -15,11 +15,7 @@ spec:
   replicas: {{ .Values.minReplicas }}
   selector:
     matchLabels:
-      {{- if .Values.extraMatchLabels }}
-      {{- toYaml .Values.extraMatchLabels | nindent 4 }}
-      {{- else }}
       app: {{ .Values.name }}
-      {{- end }}
   template:
     metadata:
       labels:
