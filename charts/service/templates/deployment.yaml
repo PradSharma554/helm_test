@@ -20,6 +20,11 @@ spec:
     metadata:
       labels:
         app: {{ .Values.name }}
+        {{- if .Values.extraLabels }}
+        {{- range $key, $value := .Values.extraLabels }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
+        {{- end }}
     spec:
       securityContext:
         {{- if and (hasKey .Values.volumeMounts "pvc") (not (empty .Values.volumeMounts.pvc)) }}
@@ -32,7 +37,7 @@ spec:
         {{- end }}
       {{- end }}
       {{- if .Values.appSecrets }}
-      serviceAccountName: secrets-account
+      serviceAccountName: {{ tpl (.Values.serviceAccountName | default "secrets-account") . }}
       {{- end }}
       volumes:
       {{- if .Values.volumeMounts }}
