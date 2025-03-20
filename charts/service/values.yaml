@@ -79,13 +79,17 @@ volumeMounts:
   configmaps:
 #    - name: zopdev-configmap
 #      mountPath: /etc/env
+#      configName:
 #      readOnly: true
   secrets:
 #    - name: zopdev-secret
 #      mountPath: /etc/secret
+#      readOnly: true
+#      secretName: 
   pvc:
 #    - name: zopdev-volume
 #      mountPath: /etc/data
+#      pvcName: zopdev-pvc
 
 alerts:
   standard:
@@ -119,10 +123,8 @@ alerts:
 #  env:
 #    cloud: "AWS"
 #  secrets:
-#   DB_PASSWORD: zs-test-postgresqldb-db-secret 
-# Secrets will be in the format env_variable: AWS_Secret_Name
-#  envFrom:
-#  command:    
+#   DB_PASSWORD: zs-test-postgresqldb-db-secret      # Secrets will be in the format env_variable: AWS_Secret_Name
+ 
 # This section deals with creating custom dashboards for grafana
 grafanaDashboard: 
 #  sample format for using json model

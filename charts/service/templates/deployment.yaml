@@ -97,7 +97,9 @@ spec:
       containers:
         - name: {{ .Values.name }}
           image: {{ .Values.image }}
-
+          {{- if .Values.args }}
+          args: {{  tpl (toJson .Values.args) . }}
+          {{- end}}
           {{- if .Values.command }}
           command: {{  tpl (toJson .Values.command) . }}
           {{- end}}
@@ -229,8 +231,15 @@ spec:
             {{- range $k,$v := .Values.env }}
               {{- if ne (toString $v) ""}}
             - name: {{ $k | quote }}
+              {{- if kindIs "map" $v }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $v.name | quote }}
+                  key: {{ $v.key | quote }}
+              {{- else }}
               value: {{ $v | quote }}
               {{- end }}
+            {{- end }}
             {{- end }}
           volumeMounts:
           {{- if .Values.volumeMounts }}
