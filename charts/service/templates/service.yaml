@@ -25,6 +25,11 @@ spec:
       targetPort: {{ $v }}
       {{- end }}
   selector:
-    app: {{ .Values.name }}
+    matchLabels:
+      {{- if .Values.extraMatchLabels }}
+      {{- toYaml .Values.extraMatchLabels | nindent 4 }}
+      {{- else }}
+      app: {{ .Values.name }}
+      {{- end }}
   type: NodePort
 ---
