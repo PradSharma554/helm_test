@@ -22,8 +22,16 @@ imagePullSecrets:
 httpPort: 8000
 metricsPort: 2121
 
-ports: # Provide the ports on which container runs its services
-# grpc: 9100
+ports:
+  # https: 8001
+  # customs: 5000
+
+# ports:
+#   - name: http-prt
+#     port: 8080
+#     targetPort: http
+#   - name: custom-port
+#     port: 5000
 
 nginx:
   host:
