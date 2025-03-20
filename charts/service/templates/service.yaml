@@ -14,6 +14,11 @@ spec:
       port: 2121
       targetPort: {{ .Values.metricsPort}}
     {{- end }}
+    {{- if .Values.servPort }}
+    - name: {{ .Values.servPort.name | default "service-port" }}
+      port: {{ .Values.servPort.port }}
+      targetPort: {{ .Values.servPort.targetPort | default .Values.servPort.port }}
+    {{- end }} 
     {{- range $k, $v := .Values.ports}}
     - name: {{ $k}}
       port: {{ $v }}

@@ -36,7 +36,7 @@ spec:
         - name: {{ . }}
         {{- end }}
       {{- end }}
-      {{- if .Values.appSecrets }}
+      {{- if or .Values.serviceAccountName .Values.appSecrets }}
       serviceAccountName: {{ tpl (.Values.serviceAccountName | default "secrets-account") . }}
       {{- end }}
       volumes:
