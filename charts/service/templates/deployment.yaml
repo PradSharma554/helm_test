@@ -119,22 +119,17 @@ spec:
             runAsGroup: 1000
             {{- end }}
           ports:
+            {{- if and .Values.httpPort (ne (int .Values.httpPort) 0) }}
             - name: http-port
               containerPort: {{ .Values.httpPort }}
+            {{- end }}
             {{- if and .Values.metricsPort (ne (int .Values.metricsPort) 0) }}
             - name: metrics-port
               containerPort: {{ .Values.metricsPort }}
             {{- end}}
-            {{- if kindIs "map" .Values.ports }}
             {{- range $k, $v := .Values.ports}}
             - name: {{ $k }}
               containerPort: {{ $v }}
-            {{- end }}
-            {{- else if kindIs "slice" .Values.ports }}
-              {{- range .Values.ports }}
-            - name: {{ .name }}
-              containerPort: {{ .port }}
-            {{- end }}
             {{- end }}
           envFrom:
             {{- range $i, $name := .Values.envFrom.configmaps }}

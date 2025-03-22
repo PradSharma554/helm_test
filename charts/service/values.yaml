@@ -22,16 +22,11 @@ imagePullSecrets:
 httpPort: 8000
 metricsPort: 2121
 
-ports:
-  # https: 8001
-  # customs: 5000
-
 # ports:
-#   - name: http-prt
-#     port: 8080
-#     targetPort: http
-#   - name: custom-port
-#     port: 5000
+#   https: 8001
+
+# targetPort:
+#   https: http
 
 nginx:
   host:
