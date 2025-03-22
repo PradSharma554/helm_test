@@ -311,7 +311,7 @@ spec:
             {{- else if ne .Values.heartbeatURL "" }}
             httpGet:
               path: {{ .Values.heartbeatURL | quote}}
-              port: {{ .Values.httpPort }}
+              port: {{ .Values.healthPort }}
             {{- end }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default 3 }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds | default 3 }}
@@ -327,7 +327,7 @@ spec:
             {{ else if ne .Values.heartbeatURL ""}}
             httpGet:
               path: {{ .Values.heartbeatURL | quote }}
-              port: {{ .Values.httpPort }}
+              port: {{ .Values.healthPort }}
             {{- end }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | default 3 }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds | default 3 }}

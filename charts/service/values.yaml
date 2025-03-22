@@ -54,7 +54,7 @@ cliService: false
 
 # Heartbeat URL
 heartbeatURL: ""
-
+healthPort : 8000
 readinessProbe:
   enable: false
 #  initialDelaySeconds: 3
