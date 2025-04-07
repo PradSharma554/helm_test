@@ -3,7 +3,7 @@ entries:
   redis-distributed:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2025-03-23T00:18:40.957935+05:30"
+    created: "2025-04-07T11:53:11.011791+05:30"
     description: Helm chart deploys redis distributed instance
     digest: b527f3bae29a145253443802ba437dc84d348ad9468e089ad016b4831b9d2e9c
     icon: https://abcd/logo.png
@@ -17,7 +17,7 @@ entries:
   service:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2025-03-23T00:18:40.960652+05:30"
+    created: "2025-04-07T11:53:11.013853+05:30"
     description: Helm chart creates a deployment, service, hpa for a service along
       with serviceMonitor etc
     digest: 041cb9563e7e980d209f77f6e20631f471855ee27fbec4f8b09cccaa371cf28f
@@ -31,7 +31,7 @@ entries:
     version: v0.0.19
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2025-03-23T00:18:40.959165+05:30"
+    created: "2025-04-07T11:53:11.012928+05:30"
     description: Helm chart creates a deployment, service, hpa for a service along
       with serviceMonitor etc
     digest: 1c5e56fd574905f524467dbcc2fe47b8515c72dfaa8a33bee764755354539524
@@ -45,7 +45,7 @@ entries:
     version: v0.0.18
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2025-03-23T00:18:40.958513+05:30"
+    created: "2025-04-07T11:53:11.012291+05:30"
     description: Helm chart creates a deployment, service, hpa for a service along
       with serviceMonitor etc
     digest: 2fa3202a717d9230224ce8350e0f6ed8390bbd15eebf6f77e4bbb9083cf23620
@@ -60,7 +60,7 @@ entries:
   services:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2025-03-23T00:18:40.961352+05:30"
+    created: "2025-04-07T11:53:11.01452+05:30"
     description: Helm chart creates a deployment, service, hpa for a service along
       with serviceMonitor etc
     digest: d93528de0241bdf5a10179895a3e7e519653086f237f0d6e824ff6bdcad69118
@@ -74,11 +74,25 @@ entries:
   zookeeper:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2025-03-23T00:18:40.961746+05:30"
+    created: "2025-04-07T11:53:11.016403+05:30"
     description: A Helm chart for Deploying Zookeeper on Kubernetes
     digest: 87fd6264df489f34154b4e3e0760a7224416334f94c520831477619d707c8c65
     name: zookeeper
     urls:
     - https://arunesh-j.github.io/helm_test/docs/zookeeper-v0.0.1.tgz
     version: v0.0.1
-generated: "2025-03-23T00:18:40.957344+05:30"
+  zookeeper-operator:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2025-04-07T11:53:11.016045+05:30"
+    description: A Helm chart for Deploying Zookeeper Operator on Kubernetes
+    digest: 651cf4432973216429c5b194918818713d2965b340642d3d46198269c49d8673
+    icon: https://zop.dev/logo.png
+    maintainers:
+    - name: ZopDev
+      url: zop.dev
+    name: zookeeper-operator
+    urls:
+    - https://arunesh-j.github.io/helm_test/docs/zookeeper-operator-v0.0.1.tgz
+    version: v0.0.1
+generated: "2025-04-07T11:53:11.011384+05:30"
