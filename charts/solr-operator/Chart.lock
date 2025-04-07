@@ -1,0 +1,6 @@
+dependencies:
+- name: zookeeper-operator
+  repository: https://arunesh-j.github.io/helm_test/docs
+  version: v0.0.1
+digest: sha256:7ab2d899a094e28c1c477683d6d0b9648b4da2a94ec79193da4b0010331b12f0
+generated: "2025-04-07T13:04:22.646492+05:30"
