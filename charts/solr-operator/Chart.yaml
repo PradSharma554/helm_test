@@ -7,7 +7,7 @@ icon: "https://zop.dev/logo.png"
 dependencies:
   - name: 'zookeeper-operator'
     version: 0.0.1
-    repository: https://arunesh-j.github.io/helm_test/docs
+    repository: https://helm.zop.dev
     condition: zookeeper-operator.install
 maintainers:
   - name: ZopDev
