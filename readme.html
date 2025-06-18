@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordPress - Zop.dev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./src/css/readme.css">
+</head>
+<body>
+    
+
+    <div class="main-content">
+        <main id="main-readme-area">
+            <div class="breadcrumb">
+                <a href="./index.html">
+                    <span>← Integrations</span>
+
+                </a>
+            </div>
+
+            <div id="readme-content">
+                <div class="loading-bar"></div> 
+                <p>Loading README content...</p>
+            </div>
+        </main>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Table of Contents</h3>
+                <button id="searchToggleButton" class="search-button" aria-label="Toggle search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div id="searchContainer" class="search-container">
+                <input type="text" id="searchInput" placeholder="Search headings...">
+            </div>
+
+            <div id="sidebar-content">
+            </div>
+        </aside>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="./src/js/readme.js"></script>
+</body>
+</html>
