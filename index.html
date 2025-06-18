@@ -1,1 +1,124 @@
-afafgb
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zopdev Integration - Connect Your DevOps Tools</title>
+    <meta name="description" content="Seamlessly connect Zopdev with essential DevOps tools - CI/CD platforms, monitoring solutions, cloud services, and collaboration apps.">
+    <link rel="stylesheet" href="./src/css/style.css">
+</head>
+
+<body>
+    <main id="main-content" role="main">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 id="hero-title">Connect Zopdev with the Tools You Already Use</h1>
+                    <p>Seamlessly connect Zopdev with the essential tools your DevOps team relies on every day—CI/CD platforms, monitoring solutions, alerting systems, cloud services, and collaboration apps—all in one place.</p>
+                </div>
+                <div class="hero-image">
+                    <img src="./src/assets/logo.png" alt="Integration illustration showing connected tools" width="200" height="150">
+                </div>
+            </div>
+        </section>
+
+        <section class="integrations" aria-labelledby="integrations-title">
+            <div class="container">
+                <h2 id="integrations-title">Featured Integrations</h2>
+                
+                <div class="search-container">
+                    <label for="search-integrations" class="sr-only">Search integrations</label>
+                    <input 
+                        type="text" 
+                        id="search-integrations" 
+                        placeholder="Search integrations... (Press '/' to focus)" 
+                        aria-describedby="search-help"
+                        autocomplete="off"
+                    >
+                    <div id="search-help" class="sr-only">Press forward slash to focus search</div>
+                </div>
+
+                <div class="tabs" role="tablist" aria-label="Integration categories">
+                    <div class="tab-buttons">
+                        <button 
+                            class="tab-btn active" 
+                            data-tab="categories" 
+                            role="tab" 
+                            aria-selected="true" 
+                            aria-controls="categories"
+                            id="tab-categories"
+                        >
+                            Categories
+                        </button>
+                    </div>
+
+                    <div class="tab-content">
+                        <div 
+                            class="tab-pane active" 
+                            id="categories" 
+                            role="tabpanel" 
+                            aria-labelledby="tab-categories"
+                        >
+                            <aside class="categories-sidebar" role="complementary" aria-label="Filter by category">
+                                <h3 class="sr-only">Categories</h3>
+                                <ul role="list" id="category-buttons">
+                                    <li>
+                                        <button class="category-btn" data-category="Applications" aria-pressed="false">
+                                            Applications
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="category-btn" data-category="Datastore" aria-pressed="false">
+                                            Datastore
+                                        </button>
+                                    </li>
+                                </ul>
+                            </aside>
+                            
+                            <div class="integration-sections">
+                                <section id="applications-section" class="category-section">
+                                    <h3 class="category-title">Applications</h3>
+                                    <div class="integration-cards" id="applications-cards" role="region" aria-live="polite" aria-label="Applications integration cards">
+                                    </div>
+                                </section>
+                                
+                                <section id="datastore-section" class="category-section">
+                                    <h3 class="category-title">Datastore</h3>
+                                    <div class="integration-cards" id="datastore-cards" role="region" aria-live="polite" aria-label="Datastore integration cards">
+                                    </div>
+                                </section>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-labelledby="search-overlay-title">
+        <div class="search-overlay-content">
+            <div class="search-overlay-header">
+                <h2 id="search-overlay-title" class="sr-only">Search Integrations</h2>
+                <input 
+                    type="text" 
+                    id="search-overlay-input" 
+                    placeholder="Search integrations..."
+                    aria-label="Search integrations"
+                    autocomplete="off"
+                >
+                <button class="search-overlay-close" aria-label="Close search">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="search-suggestions" id="search-suggestions" role="listbox" aria-label="Search suggestions">
+            </div>
+        </div>
+    </div>
+
+    <div id="sr-announcements" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+</body>
+<script type="module" src="./src/js/script.js"></script>
+</html>
