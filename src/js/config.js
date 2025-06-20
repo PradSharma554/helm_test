@@ -1,6 +1,4 @@
-// Corrected: data.js (or integrations.js)
-
-const integrationsData = { // Declare the variable normally
+const integrationsData = {
   categories: {
     Applications: [
       {

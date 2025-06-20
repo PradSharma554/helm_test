@@ -1,5 +1,4 @@
 
-/* Base styles */
 * {
     margin: 0;
     padding: 0;
@@ -10,16 +9,14 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: #f8fafc;
     line-height: 1.6;
-    color: #334155; /* Default text color for body */
+    color: #334155;
 }
 .not-found{
     display: flex;
-    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
 }
 
-/* Fixed Navigation Bar */
 .navbar {
     position: fixed;
     top: 0;
@@ -33,7 +30,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Subtle shadow */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .logo {
@@ -166,21 +163,20 @@ body {
     color: #555;
 }
 .code-container {
-    position: relative; /* This is crucial for positioning the button inside */
-    margin-bottom: 1em; /* Add some space below the code block */
+    position: relative;
+    margin-bottom: 1em;
 }
 .copy-button {
     position: absolute;
-    top: 4px; /* Adjust as needed for vertical positioning */
-    right: 5px; /* Adjust as needed for horizontal positioning */
-    /* background-color: #0D7997; Example background color */
+    top: 4px;
+    right: 5px;
     color: rgb(2, 2, 2);
     border: none;
     padding: 5px 10px;
     border-radius: 3px;
     cursor: pointer;
     font-size: 0.8em;
-    opacity: 2; /* Initially hidden */
+    opacity: 2;
     transition: opacity 0.3s ease-in-out;
     background-color: transparent;
 }
@@ -188,24 +184,22 @@ body {
     height: 14px;
     width: 13px;
 }
-/* Main Content Layout */
 .main-content {
-    margin-top: 64px; /* Space for fixed navbar */
+    margin-top: 64px;
     padding: 2rem;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     display: none;
-    grid-template-columns: 1fr 300px; /* Main content + sidebar */
+    grid-template-columns: 1fr 300px;
     gap: 3rem;
-    align-items: flex-start; /* Align main content and sidebar to the top */
+    align-items: flex-start;
 }
 
 main {
-    min-width: 0; /* Allows content to shrink within grid */
+    min-width: 0;
 }
 
-/* Breadcrumb */
 .breadcrumb {
     margin-bottom: 2rem;
     color: #64748b;
@@ -224,27 +218,22 @@ main {
     color: #1e293b;
 }
 
-/* Dynamic README Content Styling */
 #readme-content {
-    /* background: white; */
     padding: 1.5rem;
     border-radius: 8px;
-    /* border: 1px solid #e2e8f0; */
-    /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); */
     line-height: 1.7;
     color: #475569;
-    word-wrap: break-word; /* Ensure long words break to prevent overflow */
-    overflow-wrap: break-word; /* Modern equivalent for word-wrap */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
-/* Markdown rendered elements styling */
 #readme-content h1 {
     font-size: 2rem;
     color: #1e293b;
     font-weight: 600;
     margin-bottom: 1.5rem;
-    padding-top: 0.5rem; /* For scroll offset */
-    scroll-margin-top: 70px; /* Adjust this to account for fixed navbar height */
+    padding-top: 0.5rem; 
+    scroll-margin-top: 70px;
 }
 
 #readme-content h2 {
@@ -253,8 +242,8 @@ main {
     font-weight: 600;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    padding-top: 0.5rem; /* For scroll offset */
-    scroll-margin-top: 70px; /* Adjust this to account for fixed navbar height */
+    padding-top: 0.5rem;
+    scroll-margin-top: 70px; 
 }
 
 #readme-content h3 {
@@ -282,17 +271,16 @@ main {
 #readme-content pre {
     background: #f1f5f9;
     padding: 1.5rem 1rem 1rem 1rem;
-    /* padding-top: 1.5 rem; */
     border-radius: 6px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     font-size: 0.875rem;
     color: #475569;
     margin: 1rem 0;
-    overflow-x: auto; /* Ensures code blocks are scrollable if too wide */
+    overflow-x: auto;
 }
 
 #readme-content pre code {
-    display: block; /* Ensures proper formatting */
+    display: block;
 }
 
 #readme-content img {
@@ -307,8 +295,8 @@ main {
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
-    display: block; /* Required for overflow-x to work */
-    overflow-x: auto; /* Make tables horizontally scrollable */
+    display: block;
+    overflow-x: auto;
 }
 
 #readme-content th,
@@ -324,25 +312,21 @@ main {
     color: #1e293b;
 }
 
-/* Right Panel / Sidebar (Table of Contents) */
 .sidebar {
-    position: sticky; /* Keeps the entire sidebar stuck relative to the main page scroll */
-    top: 84px; /* Offset from fixed navbar + desired top margin */
-    height: calc(100vh - 104px); /* Makes sidebar take up most of the viewport height */
-    /* !!! IMPORTANT: REMOVE THIS LINE !!! */
-    /* overflow-y: auto; */
+    position: sticky;
+    top: 84px;
+    height: calc(100vh - 104px);
     background: white;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
-    padding: 1.5rem; /* Padding for the entire sidebar content (header, search, and links) */
+    padding: 1.5rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    display: flex; /* Makes the sidebar a flex container */
-    flex-direction: column; /* Stacks its children (header, search, content) vertically */
+    display: flex;
+    flex-direction: column;
 }
 .copy-svg{
     background-color: #f1f5f9;
     border-radius: 5px;
-    /* margin: 1px; */
 }
 .language-bash{
     padding-right: 10px;
@@ -357,20 +341,18 @@ main {
 }
 }
 .sidebar-header {
-    /* No need for position: sticky here. It's a static child of a sticky flex container. */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem; /* Space between header and search/content */
+    margin-bottom: 1rem;
     border-bottom: 1px solid #e2e8f0;
     padding-bottom: 0.5rem;
-    /* Its padding-top is handled by the .sidebar's padding */
 }
 .sidebar h3 {
     font-size: 1rem;
     font-weight: 600;
     color: #1e293b;
-    margin-bottom: 0; /* Adjust margin as it's part of flex container */
+    margin-bottom: 0;
 }
 
 .search-button {
@@ -390,16 +372,13 @@ main {
 }
 
 .search-container {
-    /* No need for position: sticky here either. It's a static child. */
-    margin-bottom: 1rem; /* Space between search and actual sidebar content */
-    display: none; /* Hidden by default */
+    margin-bottom: 1rem;
+    display: none;
 }
 
 .search-container.active {
-    display: block; /* Show when active */
+    display: block;
 }
-
-
 
 .search-container input {
     width: 100%;
@@ -416,15 +395,11 @@ main {
     border-color: #3b82f6;
 }
 
-
-
 #sidebar-content {
     display: flex;
-    flex-direction: column; /* Keeps its own children (links) stacked */
-    flex-grow: 1; /* This is key: Makes it take up all available vertical space in the sidebar */
-    overflow-y: auto; /* !!! IMPORTANT: This makes ONLY the content area scrollable !!! */
-    /* You can add padding-top here if you want extra space between the search bar and the first link. */
-    /* For example: padding-top: 0.5rem; */
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
     border-radius: 5px;
 }
 
@@ -435,9 +410,8 @@ main {
     margin-bottom: 0.25rem;
     border-radius: 4px;
     transition: background-color 0.2s, color 0.2s;
-    white-space: nowrap; /* Prevent wrapping for links */
-    /* overflow: hidden; Hide overflow text */
-    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 #sidebar-content a:hover {
@@ -446,21 +420,20 @@ main {
 }
 
 #sidebar-content a.level-2 {
-    padding-left: 1.5rem; /* Indent for h2 headings */
+    padding-left: 1.5rem;
 }
 
 #sidebar-content .active {
-    background-color: #e0f2f7; /* Highlight active section */
+    background-color: #e0f2f7;
     color: #0891b2;
     font-weight: 600;
 }
 
 .sidebar-show-all {
-    display: block; /* Show by default */
-    margin-top: 0.5rem; /* Space below search */
+    display: block;
+    margin-top: 0.5rem;
 }
 
-/* Chat Button */
 .chat-button {
     position: fixed;
     bottom: 2rem;
@@ -483,10 +456,9 @@ main {
     transform: scale(1.05);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .main-content {
-        grid-template-columns: 1fr; /* Stack content and sidebar */
+        grid-template-columns: 1fr;
         padding: 1rem;
         gap: 1.5rem;
     }
@@ -496,52 +468,44 @@ main {
     }
 
     .nav-links {
-        display: none; /* Hide nav links on small screens */
+        display: none;
     }
 
     .sidebar {
-        position: static; /* No longer sticky */
-        height: auto; /* Auto height */
+        position: static;
+        height: auto;
         margin-top: 1.5rem;
     }
-
-    #readme-content {
-        padding: 1rem;
-    }
 }
-/* Add to your existing #readme-content styles */
+
 #readme-content {
-    position: relative; /* Needed for absolute positioning of the loading bar */
-    overflow: hidden; /* Hide overflow of loading bar */
-    /* background: white; */
+    position: relative; 
+    overflow: hidden; 
     padding: 1.5rem;
     border-radius: 8px;
-    /* border: 1px solid #e2e8f0; */
-    /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); */
     line-height: 1.7;
     color: #475569;
-    word-wrap: break-word; /* Ensure long words break to prevent overflow */
-    overflow-wrap: break-word; /* Modern equivalent for word-wrap */
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
 }
 .img-404{
     content: center;
 }
-/* Loading Bar Styles */
 .loading-bar {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px; /* Thickness of the loading bar */
-    background-color: #3b82f6; /* Blue color for the loading bar */
-    transform: translateX(-100%); /* Start off-screen to the left */
-    animation: loading 1.5s infinite ease-in-out; /* Animation properties */
-    z-index: 10; /* Ensure it's above other content */
-    display: none; /* Hidden by default, controlled by JS */
+    height: 4px;
+    background-color: #3b82f6; 
+    transform: translateX(-100%);
+    animation: loading 1.5s infinite ease-in-out; 
+    z-index: 10;
+    display: none;
 }
 
 .loading-bar.active {
-    display: block; /* Show when active */
+    display: block;
 }
 
 @keyframes loading {

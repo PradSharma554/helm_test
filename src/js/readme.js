@@ -7,17 +7,12 @@ const mainReadmeArea = document.getElementById('main-readme-area');
 const searchToggleButton = document.getElementById('searchToggleButton');
 const searchContainer = document.getElementById('searchContainer');
 const searchInput = document.getElementById('searchInput');
-const loadingBar = document.querySelector('.loading-bar'); // Get the loading bar element
-const loadingMessage = readmeContentDiv.querySelector('p'); // Get the initial loading message
+const loadingBar = document.querySelector('.loading-bar');
+const loadingMessage = readmeContentDiv.querySelector('p');
 
 let headingElements = [];
 let sidebarLinks = [];
 
-/**
- * Attempts to fetch a markdown file from a given URL.
- * @param {string} url The URL of the markdown file.
- * @returns {Promise<string|null>} A promise that resolves with the markdown content as a string, or null if fetching fails.
- */
 async function fetchMarkdown(url) {
     try {
         const response = await fetch(url);
@@ -25,11 +20,11 @@ async function fetchMarkdown(url) {
             return await response.text();
         } else {
             console.warn(`Failed to fetch markdown from ${url}: Status ${response.status}`);
-            return null; // Return null on non-OK responses (including 404)
+            return null;
         }
     } catch (error) {
         console.error(`Error during fetch for ${url}:`, error);
-        return null; // Return null on network errors
+        return null;
     }
 }
 
@@ -40,19 +35,16 @@ async function fetchReadme() {
     document.getElementById('load').style.display = 'none';
     let readmeMarkdown = null;
 
-    // Set the page title
     if (integrationId) {
         document.title = `${integrationId} - zop.dev`;
     } else {
-        document.title = 'Integration - zop.dev'; // Default title if no id
+        document.title = 'Integration - zop.dev';
     }
 
-    // Check if integrationId is 'contribution' first, as it's not in integrationsData
     if (integrationId === 'contribution') {
         const contributionUrl = 'https://raw.githubusercontent.com/zopdev/helm-charts/main/CONTRIBUTING.md';
         readmeMarkdown = await fetchMarkdown(contributionUrl);
     } else {
-        // Check if integrationId exists in integrationsData for other IDs
         const integrationExists = Object.values(integrationsData.categories).flat().some(integration => integration.id === integrationId);
 
         if (!integrationId || !integrationExists) {
@@ -138,7 +130,6 @@ function processAndDisplayReadme(htmlContent) {
         sidebarLinks.push(sidebarLink);
     });
 
-    // Add copy buttons to code blocks
     addCopyButtonsToCodeBlocks();
 
     mainReadmeArea.addEventListener('scroll', highlightActiveSection);
@@ -147,27 +138,22 @@ function processAndDisplayReadme(htmlContent) {
 }
 
 function addCopyButtonsToCodeBlocks() {
-    // Select all <pre> elements (which typically contain <code> blocks parsed from markdown)
     const codeBlocks = readmeContentDiv.querySelectorAll('pre');
 
     codeBlocks.forEach(pre => {
-        // Create a container for the code block and button to allow for relative positioning
         const codeContainer = document.createElement('div');
         codeContainer.style.position = 'relative';
-        codeContainer.style.marginBottom = '1em'; // Add some space below the block
+        codeContainer.style.marginBottom = '1em';
 
-        // Move the <pre> element into the new container
         pre.parentNode.insertBefore(codeContainer, pre);
         codeContainer.appendChild(pre);
 
         const copyButton = document.createElement('button');
         copyButton.innerHTML = `<svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <!-- The back "copied" document - positioned higher and slightly to the left -->
   <rect class="cop" x="10" y="6"  rx="2" ry="2"/>
-  <!-- The front "original" document - positioned lower and slightly to the right -->
   <rect class="cop" x="6" y="3"  rx="2" ry="2"/>
 </svg>`;
-        copyButton.classList.add('copy-button'); // Add a class for styling
+        copyButton.classList.add('copy-button');
 
         copyButton.addEventListener('click', async () => {
             const code = pre.querySelector('code');
@@ -177,12 +163,10 @@ function addCopyButtonsToCodeBlocks() {
                     copyButton.textContent = 'Copied!';
                     setTimeout(() => {
                         copyButton.innerHTML = `<svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <!-- The back "copied" document - positioned higher and slightly to the left -->
   <rect x="10" y="6" width="12" height="16" rx="2" ry="2"/>
-  <!-- The front "original" document - positioned lower and slightly to the right -->
   <rect x="6" y="3" width="12" height="16" rx="2" ry="2"/>
 </svg>`;
-                    }, 2000); // Reset button text after 2 seconds
+                    }, 2000);
                 } catch (err) {
                     console.error('Failed to copy text: ', err);
                     copyButton.textContent = 'Error';
@@ -217,7 +201,6 @@ function highlightActiveSection() {
             break;
         }
     }
-    // updateSidebarActiveLink(activeSectionId); // This was commented out in original code, keeping it that way.
 }
 
 function updateSidebarActiveLink(activeSectionId) {
