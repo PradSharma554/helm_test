@@ -161,11 +161,11 @@ function addCopyButtonsToCodeBlocks() {
         codeContainer.appendChild(pre);
 
         const copyButton = document.createElement('button');
-        copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        copyButton.innerHTML = `<svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <!-- The back "copied" document - positioned higher and slightly to the left -->
-  <rect x="10" y="6" width="12" height="16" rx="2" ry="2"/>
+  <rect class="cop" x="10" y="6"  rx="2" ry="2"/>
   <!-- The front "original" document - positioned lower and slightly to the right -->
-  <rect x="6" y="3" width="12" height="16" rx="2" ry="2"/>
+  <rect class="cop" x="6" y="3"  rx="2" ry="2"/>
 </svg>`;
         copyButton.classList.add('copy-button'); // Add a class for styling
 
@@ -176,7 +176,7 @@ function addCopyButtonsToCodeBlocks() {
                     await navigator.clipboard.writeText(code.textContent);
                     copyButton.textContent = 'Copied!';
                     setTimeout(() => {
-                        copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        copyButton.innerHTML = `<svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <!-- The back "copied" document - positioned higher and slightly to the left -->
   <rect x="10" y="6" width="12" height="16" rx="2" ry="2"/>
   <!-- The front "original" document - positioned lower and slightly to the right -->

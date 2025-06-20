@@ -171,7 +171,7 @@ body {
 }
 .copy-button {
     position: absolute;
-    top: 5px; /* Adjust as needed for vertical positioning */
+    top: 4px; /* Adjust as needed for vertical positioning */
     right: 5px; /* Adjust as needed for horizontal positioning */
     /* background-color: #0D7997; Example background color */
     color: rgb(2, 2, 2);
@@ -183,6 +183,10 @@ body {
     opacity: 2; /* Initially hidden */
     transition: opacity 0.3s ease-in-out;
     background-color: transparent;
+}
+.cop{
+    height: 14px;
+    width: 13px;
 }
 /* Main Content Layout */
 .main-content {
@@ -277,7 +281,8 @@ main {
 
 #readme-content pre {
     background: #f1f5f9;
-    padding: 1rem;
+    padding: 1.5rem 1rem 1rem 1rem;
+    /* padding-top: 1.5 rem; */
     border-radius: 6px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     font-size: 0.875rem;
@@ -334,7 +339,23 @@ main {
     display: flex; /* Makes the sidebar a flex container */
     flex-direction: column; /* Stacks its children (header, search, content) vertically */
 }
-
+.copy-svg{
+    background-color: #f1f5f9;
+    border-radius: 5px;
+    /* margin: 1px; */
+}
+.language-bash{
+    padding-right: 10px;
+}
+@media only screen and (max-width: 767px) {
+  #sidebar {
+    display: none;
+  }
+  .cop{
+    height: 11px;
+    width: 10px;
+}
+}
 .sidebar-header {
     /* No need for position: sticky here. It's a static child of a sticky flex container. */
     display: flex;
