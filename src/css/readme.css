@@ -12,6 +12,12 @@ body {
     line-height: 1.6;
     color: #334155; /* Default text color for body */
 }
+.not-found{
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+}
 
 /* Fixed Navigation Bar */
 .navbar {
@@ -124,6 +130,60 @@ body {
     background: #0f172a;
 }
 
+.load {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    gap: 15px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.simple-spinner {
+    border: 6px solid #e0e0e0;
+    border-top: 6px solid #0D7997;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: simple-spin 1s linear infinite;
+}
+
+@keyframes simple-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.simple-loader-text {
+    font-size: 1.1em;
+    color: #555;
+}
+.code-container {
+    position: relative; /* This is crucial for positioning the button inside */
+    margin-bottom: 1em; /* Add some space below the code block */
+}
+.copy-button {
+    position: absolute;
+    top: 5px; /* Adjust as needed for vertical positioning */
+    right: 5px; /* Adjust as needed for horizontal positioning */
+    /* background-color: #0D7997; Example background color */
+    color: rgb(2, 2, 2);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+    opacity: 2; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out;
+    background-color: transparent;
+}
 /* Main Content Layout */
 .main-content {
     margin-top: 64px; /* Space for fixed navbar */
@@ -131,7 +191,7 @@ body {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    display: grid;
+    display: none;
     grid-template-columns: 1fr 300px; /* Main content + sidebar */
     gap: 3rem;
     align-items: flex-start; /* Align main content and sidebar to the top */
@@ -261,28 +321,30 @@ main {
 
 /* Right Panel / Sidebar (Table of Contents) */
 .sidebar {
-    position: sticky;
-    top: 84px; /* Offset from fixed navbar */
-    height: calc(100vh - 104px); /* Full height minus header and some margin */
-    overflow-y: auto; /* Scrollable if content overflows */
+    position: sticky; /* Keeps the entire sidebar stuck relative to the main page scroll */
+    top: 84px; /* Offset from fixed navbar + desired top margin */
+    height: calc(100vh - 104px); /* Makes sidebar take up most of the viewport height */
+    /* !!! IMPORTANT: REMOVE THIS LINE !!! */
+    /* overflow-y: auto; */
     background: white;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
-    padding: 1.5rem;
+    padding: 1.5rem; /* Padding for the entire sidebar content (header, search, and links) */
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    display: flex; /* Use flexbox for vertical alignment */
-    flex-direction: column; /* Stack children vertically */
+    display: flex; /* Makes the sidebar a flex container */
+    flex-direction: column; /* Stacks its children (header, search, content) vertically */
 }
 
 .sidebar-header {
+    /* No need for position: sticky here. It's a static child of a sticky flex container. */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; /* Space between header and search/content */
     border-bottom: 1px solid #e2e8f0;
     padding-bottom: 0.5rem;
+    /* Its padding-top is handled by the .sidebar's padding */
 }
-
 .sidebar h3 {
     font-size: 1rem;
     font-weight: 600;
@@ -307,13 +369,16 @@ main {
 }
 
 .search-container {
-    margin-bottom: 1rem;
+    /* No need for position: sticky here either. It's a static child. */
+    margin-bottom: 1rem; /* Space between search and actual sidebar content */
     display: none; /* Hidden by default */
 }
 
 .search-container.active {
     display: block; /* Show when active */
 }
+
+
 
 .search-container input {
     width: 100%;
@@ -331,10 +396,15 @@ main {
 }
 
 
+
 #sidebar-content {
     display: flex;
-    flex-direction: column;
-    flex-grow: 1; /* Allows sidebar content to take available space */
+    flex-direction: column; /* Keeps its own children (links) stacked */
+    flex-grow: 1; /* This is key: Makes it take up all available vertical space in the sidebar */
+    overflow-y: auto; /* !!! IMPORTANT: This makes ONLY the content area scrollable !!! */
+    /* You can add padding-top here if you want extra space between the search bar and the first link. */
+    /* For example: padding-top: 0.5rem; */
+    border-radius: 5px;
 }
 
 #sidebar-content a {
@@ -345,7 +415,7 @@ main {
     border-radius: 4px;
     transition: background-color 0.2s, color 0.2s;
     white-space: nowrap; /* Prevent wrapping for links */
-    overflow: hidden; /* Hide overflow text */
+    /* overflow: hidden; Hide overflow text */
     text-overflow: ellipsis; /* Add ellipsis for overflow text */
 }
 
@@ -432,7 +502,9 @@ main {
     word-wrap: break-word; /* Ensure long words break to prevent overflow */
     overflow-wrap: break-word; /* Modern equivalent for word-wrap */
 }
-
+.img-404{
+    content: center;
+}
 /* Loading Bar Styles */
 .loading-bar {
     position: absolute;

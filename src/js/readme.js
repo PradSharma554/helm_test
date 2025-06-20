@@ -1,3 +1,4 @@
+import integrationsData from "./config.js";
 const urlParams = new URLSearchParams(window.location.search);
 const integrationId = urlParams.get('id');
 const readmeContentDiv = document.getElementById('readme-content');
@@ -33,43 +34,75 @@ async function fetchMarkdown(url) {
 }
 
 async function fetchReadme() {
-    // Show loading bar and message
     if (loadingBar) loadingBar.classList.add('active');
-    if (loadingMessage) loadingMessage.style.display = 'block'; // Ensure message is visible
-
-    const baseUrl = `https://raw.githubusercontent.com/zopdev/helm-charts/main/charts/${integrationId}/`;
-    const readmeUrlsToTry = [`${baseUrl}README.md`, `${baseUrl}Readme.md`];
-
+    if (loadingMessage) loadingMessage.style.display = 'block';
+    document.getElementById('main-content').style.display = 'grid';
+    document.getElementById('load').style.display = 'none';
     let readmeMarkdown = null;
 
-    // Try fetching README.md first
-    readmeMarkdown = await fetchMarkdown(readmeUrlsToTry[0]);
+    // Set the page title
+    if (integrationId) {
+        document.title = `${integrationId} - zop.dev`;
+    } else {
+        document.title = 'Integration - zop.dev'; // Default title if no id
+    }
 
-    // If README.md failed, try Readme.md
-    if (readmeMarkdown === null) {
-        readmeMarkdown = await fetchMarkdown(readmeUrlsToTry[1]);
+    // Check if integrationId is 'contribution' first, as it's not in integrationsData
+    if (integrationId === 'contribution') {
+        const contributionUrl = 'https://raw.githubusercontent.com/zopdev/helm-charts/main/CONTRIBUTING.md';
+        readmeMarkdown = await fetchMarkdown(contributionUrl);
+    } else {
+        // Check if integrationId exists in integrationsData for other IDs
+        const integrationExists = Object.values(integrationsData.categories).flat().some(integration => integration.id === integrationId);
+
+        if (!integrationId || !integrationExists) {
+            document.body.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <img decoding="async" width="671" height="671" sizes="calc(min(100vw * 0.8867, 1064px) * 0.6)" srcset="https://framerusercontent.com/images/oG2yEHscd5VhHxwWhQzz7ygGVBU.svg?scale-down-to=512 512w,https://framerusercontent.com/images/oG2yEHscd5VhHxwWhQzz7ygGVBU.svg 761w" src="https://framerusercontent.com/images/oG2yEHscd5VhHxwWhQzz7ygGVBU.svg" alt="" style="display:block;border-radius:inherit;object-position:center;object-fit:cover; margin: 0 auto;">
+                    <button onclick="window.location.href='./index.html'" style="margin-top: 20px; padding: 10px 20px; background-color: #0D7997; color: white; border: none; border-radius: 5px; cursor: pointer;">Home Page</button>
+                </div>
+            `;
+            if (loadingBar) loadingBar.classList.remove('active');
+            if (loadingMessage) loadingMessage.style.display = 'none';
+            return;
+        }
+
+        const baseUrl = `https://raw.githubusercontent.com/zopdev/helm-charts/main/charts/${integrationId}/`;
+        const readmeUrlsToTry = [`${baseUrl}README.md`, `${baseUrl}Readme.md`];
+
+        readmeMarkdown = await fetchMarkdown(readmeUrlsToTry[0]);
+
+        if (readmeMarkdown === null) {
+            readmeMarkdown = await fetchMarkdown(readmeUrlsToTry[1]);
+        }
     }
 
     if (readmeMarkdown !== null) {
         const readmeHtml = marked.parse(readmeMarkdown);
         processAndDisplayReadme(readmeHtml);
     } else {
-        readmeContentDiv.innerHTML = `<p style="color: #ef4444;">Error loading README content. Neither README.md nor Readme.md could be found or loaded.</p>`;
+        document.body.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <img decoding="async" width="671" height="671" sizes="calc(min(100vw * 0.8867, 1064px) * 0.6)" srcset="https://framerusercontent.com/images/oG2yEHscd5VhHxwWhQzz7ygGVBU.svg?scale-down-to=512 512w,https://framerusercontent.com/images/oG2yEHscd5VhHxwWhQzz7ygGVBU.svg 761w" src="https://framerusercontent.com/images/oG2yEHscd5VhHxwWhQzz7ygGVBU.svg" alt="" style="display:block;border-radius:inherit;object-position:center;object-fit:cover; margin: 0 auto;">
+                <button onclick="window.location.href='./index.html'" style="margin-top: 20px; padding: 10px 20px; background-color: #0D7997; color: white; border: none; border-radius: 5px; cursor: pointer;">Home Page</button>
+                ${integrationId === 'contribution' ? '<p style="color: #ef4444; margin-top: 15px;">Error loading CONTRIBUTING.md content.</p>' : ''}
+            </div>
+        `;
     }
 
-    // Hide loading bar after content is rendered or an error occurs
     if (loadingBar) loadingBar.classList.remove('active');
-    if (loadingMessage) loadingMessage.style.display = 'none'; // Hide the loading message once content is loaded or error shown
+    if (loadingMessage) loadingMessage.style.display = 'none';
 }
 
+
 function processAndDisplayReadme(htmlContent) {
-    readmeContentDiv.innerHTML = htmlContent; // This will overwrite the loading message and bar initially
+    readmeContentDiv.innerHTML = htmlContent;
     sidebarContentDiv.innerHTML = '';
     headingElements = [];
     sidebarLinks = [];
 
     const showAllLink = document.createElement('a');
-    showAllLink.href = '#';
+    showAllLink.href = '#section-0';
     showAllLink.textContent = 'Show All';
     showAllLink.classList.add('sidebar-show-all');
     showAllLink.addEventListener('click', (event) => {
@@ -105,17 +138,68 @@ function processAndDisplayReadme(htmlContent) {
         sidebarLinks.push(sidebarLink);
     });
 
+    // Add copy buttons to code blocks
+    addCopyButtonsToCodeBlocks();
+
     mainReadmeArea.addEventListener('scroll', highlightActiveSection);
     window.addEventListener('resize', highlightActiveSection);
     setTimeout(highlightActiveSection, 100);
 }
+
+function addCopyButtonsToCodeBlocks() {
+    // Select all <pre> elements (which typically contain <code> blocks parsed from markdown)
+    const codeBlocks = readmeContentDiv.querySelectorAll('pre');
+
+    codeBlocks.forEach(pre => {
+        // Create a container for the code block and button to allow for relative positioning
+        const codeContainer = document.createElement('div');
+        codeContainer.style.position = 'relative';
+        codeContainer.style.marginBottom = '1em'; // Add some space below the block
+
+        // Move the <pre> element into the new container
+        pre.parentNode.insertBefore(codeContainer, pre);
+        codeContainer.appendChild(pre);
+
+        const copyButton = document.createElement('button');
+        copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- The back "copied" document - positioned higher and slightly to the left -->
+  <rect x="10" y="6" width="12" height="16" rx="2" ry="2"/>
+  <!-- The front "original" document - positioned lower and slightly to the right -->
+  <rect x="6" y="3" width="12" height="16" rx="2" ry="2"/>
+</svg>`;
+        copyButton.classList.add('copy-button'); // Add a class for styling
+
+        copyButton.addEventListener('click', async () => {
+            const code = pre.querySelector('code');
+            if (code) {
+                try {
+                    await navigator.clipboard.writeText(code.textContent);
+                    copyButton.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- The back "copied" document - positioned higher and slightly to the left -->
+  <rect x="10" y="6" width="12" height="16" rx="2" ry="2"/>
+  <!-- The front "original" document - positioned lower and slightly to the right -->
+  <rect x="6" y="3" width="12" height="16" rx="2" ry="2"/>
+</svg>`;
+                    }, 2000); // Reset button text after 2 seconds
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    copyButton.textContent = 'Error';
+                }
+            }
+        });
+        codeContainer.appendChild(copyButton);
+    });
+}
+
 
 function scrollToSection(sectionId) {
     const targetElement = document.getElementById(sectionId);
     if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        updateSidebarActiveLink(sectionId); 
+        updateSidebarActiveLink(sectionId);
         setTimeout(highlightActiveSection, 300);
     }
 }
@@ -133,7 +217,7 @@ function highlightActiveSection() {
             break;
         }
     }
-    // updateSidebarActiveLink(activeSectionId);
+    // updateSidebarActiveLink(activeSectionId); // This was commented out in original code, keeping it that way.
 }
 
 function updateSidebarActiveLink(activeSectionId) {
@@ -143,7 +227,6 @@ function updateSidebarActiveLink(activeSectionId) {
 
     if (activeSectionId) {
         const activeLinked = sidebarContentDiv.querySelector(`a[href="#${activeSectionId}"]`);
-        // console.log(activeLinked);
         if (activeLinked) {
             activeLinked.classList.add('active');
         }
