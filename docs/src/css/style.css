@@ -361,26 +361,16 @@ img {
  height: 180px;
 }
 
-
-.integration-card:hover {
- border-color: rgba(163, 163, 163);
+.integration-card-link {
+ text-decoration: none;
 }
-
-
-.integration-card:focus-within {
- box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
- border-color: #8EC0E0;
-}
-
 
 .integration-card-header {
  display: flex;
  align-items: center;
  margin-bottom: 1rem;
 }
-.integration-card-link {
- text-decoration: none;
-}
+
 .integration-card-icon {
  width: 2.5rem;
  height: 2.5rem;
@@ -388,7 +378,6 @@ img {
  border-radius: 0.5rem;
  object-fit: contain;
 }
-
 
 .integration-card-title {
  font-size: 1.125rem;
@@ -406,6 +395,18 @@ img {
  display: -webkit-box;
  -webkit-line-clamp: 2;
  -webkit-box-orient: vertical;
+}
+
+
+
+.integration-card:hover {
+ border-color: rgba(163, 163, 163);
+}
+
+
+.integration-card:focus-within {
+ box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+ border-color: #8EC0E0;
 }
 
 
